@@ -1,6 +1,7 @@
 package com.example.fast_stock.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,7 +29,7 @@ public class Produto {
     private String descricao;
 
     @Column(nullable = false)
-    private BigDecimal preco;
+    private Long preco;
 
     @Column(nullable = false)
     private Integer quantidadeEstoque;
@@ -36,4 +37,9 @@ public class Produto {
     @ManyToOne(optional = false)
     private Categoria categoria;
 
+    @Override
+    public String toString() {
+        return "Produto [id=" + id + ", codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + ", preco="
+                + preco + ", quantidadeEstoque=" + quantidadeEstoque + ", categoria=" + categoria + "]";
+    }
 }

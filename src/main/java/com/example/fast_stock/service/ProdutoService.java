@@ -1,11 +1,13 @@
 package com.example.fast_stock.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.fast_stock.model.Categoria;
 import com.example.fast_stock.model.Produto;
 import com.example.fast_stock.repository.ProdutoRepository;
 
@@ -38,5 +40,16 @@ public class ProdutoService {
     @Transactional
     public List<Produto> listarTodos() {
         return repo.findAll();
+    }
+
+    @Transactional
+    public Optional<Produto> buscaPorId(Long id) {
+        return repo.findById(id);
+    }
+
+    @Transactional
+    public List<Produto> buscarPorCategoria(Categoria c) {
+        List<Produto> p = repo.findByCategoria(c);
+        return p;
     }
 }

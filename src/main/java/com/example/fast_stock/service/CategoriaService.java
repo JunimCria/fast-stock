@@ -1,6 +1,7 @@
 package com.example.fast_stock.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,4 +43,18 @@ public class CategoriaService {
         return repo.findAll();
     }
 
+    // @Transactional
+    // public List<Categoria> buscarPorId(Long id) {
+
+    //     List<Categoria> categoria;
+    //     Optional<Categoria> c = repo.findById(id);
+    //     if (!c.isPresent()) {
+    //         categoria.add(new Categoria());
+    //         return categoria;
+    //     } else {
+    //         categoria.add(c.get());
+
+    //         return categoria;
+    //     }
+    // }
 }

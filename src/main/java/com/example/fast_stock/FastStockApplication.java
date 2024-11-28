@@ -1,14 +1,19 @@
 package com.example.fast_stock;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Calendar;
+import java.util.Date;
 import com.example.fast_stock.model.Categoria;
 import com.example.fast_stock.model.Cliente;
+import com.example.fast_stock.model.Fornecedor;
+import com.example.fast_stock.model.NotaFiscalEntrada;
 import com.example.fast_stock.model.Produto;
 import com.example.fast_stock.service.CategoriaService;
 import com.example.fast_stock.service.ClienteService;
@@ -28,7 +33,6 @@ public class FastStockApplication {
 
 			try {
 
-				// teste categoria
 				Categoria c = new Categoria();
 				c.setNome("Limpeza");
 				categoriaService.salvar(c);
@@ -63,26 +67,28 @@ public class FastStockApplication {
 					System.out.println(e.getNome());
 				});
 
-				// Cliente cliente = new Cliente();
+				SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+				Calendar cal = Calendar.getInstance();
+				cal.set(Calendar.YEAR, 2020);
+				cal.set(Calendar.MONTH, 11 - 1);
+				cal.set(Calendar.DAY_OF_MONTH, 10);
+				Date date = new Date(cal.getTimeInMillis());
+				System.out.println(sdf.format(date));
 
-				// cliente.setCpfOuCnpj("08158930514");
-				// cliente.setEndereco("Rua casa massa");
-				// cliente.setNome("Junim");
-				// clienteService.salvar(cliente);
-				// clienteService.listarTodos().forEach((e) -> {
-				// System.out.println("nome: " + e.getNome() + "\nCpf/Cnpj: " +
-				// e.getCpfOuCnpj());
-				// });
+				NotaFiscalEntrada nfe = new NotaFiscalEntrada();
+
+				nfe.setData(date);
+
+				Fornecedor f = new Fornecedor();
+
+				f.setCnpj("121211-1000");
+				f.setEndereco("Caso joaozinho");
+				f.setNome("Casa de Limpeza");
+				f.setTelefone("77999014752");
 
 			} catch (RuntimeException e) {
 				System.out.println(e.getMessage());
 			}
-
-			System.out.println("Hello World");
-
-			categoriaService.listarTodos().forEach((e) -> {
-				System.out.println(e.getNome() + " " + e.getId());
-			});
 
 		};
 	}

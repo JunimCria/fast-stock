@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Calendar;
+import java.util.Date;
 import com.example.fast_stock.model.Categoria;
 import com.example.fast_stock.model.Cliente;
 import com.example.fast_stock.model.Fornecedor;
@@ -37,7 +39,6 @@ public class FastStockApplication {
 
 			try {
 
-				// teste categoria
 				Categoria c = new Categoria();
 				c.setNome("Limpeza");
 				categoriaService.salvar(c);

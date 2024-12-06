@@ -32,4 +32,14 @@ public class Fornecedor {
     @OneToMany(mappedBy = "fornecedor")
     private List<NotaFiscalEntrada> notasFiscais;
 
+    @Override
+    public String toString() {
+        return "Fornecedor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", notasFiscais=" + notasFiscais +
+                '}';
+    }
+
 }

@@ -29,6 +29,6 @@ public class ItemNotaFiscalEntrada {
     private Integer quantidade;
 
     @Column(nullable = false)
-    private BigDecimal precoUnitario;
+    private Long precoUnitario;
 
 }

@@ -1,6 +1,8 @@
 package com.example.fast_stock;
 
 import java.math.BigDecimal;
+import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,9 +11,15 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.fast_stock.model.Categoria;
 import com.example.fast_stock.model.Cliente;
+import com.example.fast_stock.model.Fornecedor;
+import com.example.fast_stock.model.ItemNotaFiscalEntrada;
+import com.example.fast_stock.model.NotaFiscalEntrada;
 import com.example.fast_stock.model.Produto;
 import com.example.fast_stock.service.CategoriaService;
 import com.example.fast_stock.service.ClienteService;
+import com.example.fast_stock.service.FornecedorService;
+import com.example.fast_stock.service.ItemNotaFiscalEntradaService;
+import com.example.fast_stock.service.NotaFiscalEntradaService;
 import com.example.fast_stock.service.ProdutoService;
 
 @SpringBootApplication
@@ -23,7 +31,8 @@ public class FastStockApplication {
 
 	@Bean
 	public CommandLineRunner demo(CategoriaService categoriaService, ClienteService clienteService,
-			ProdutoService produtoService) {
+			ProdutoService produtoService, ItemNotaFiscalEntradaService itemEntradaService,
+			FornecedorService fornecedorService, NotaFiscalEntradaService notaEntradaService) {
 		return (args) -> {
 
 			try {
@@ -63,26 +72,46 @@ public class FastStockApplication {
 					System.out.println(e.getNome());
 				});
 
-				// Cliente cliente = new Cliente();
+				Cliente cliente = new Cliente();
 
-				// cliente.setCpfOuCnpj("08158930514");
-				// cliente.setEndereco("Rua casa massa");
-				// cliente.setNome("Junim");
-				// clienteService.salvar(cliente);
-				// clienteService.listarTodos().forEach((e) -> {
-				// System.out.println("nome: " + e.getNome() + "\nCpf/Cnpj: " +
-				// e.getCpfOuCnpj());
-				// });
+				cliente.setCpfOuCnpj("08158930514");
+				cliente.setEndereco("Rua casa massa");
+				cliente.setNome("Junim");
+				clienteService.salvar(cliente);
+				clienteService.listarTodos().forEach((e) -> {
+					System.out.println("nome: " + e.getNome() + "\nCpf/Cnpj: " +
+							e.getCpfOuCnpj());
+				});
+
+				NotaFiscalEntrada notaEntrada = new NotaFiscalEntrada();
+
+				Date date = new Date();
+				notaEntrada.setData(date);
+
+				Fornecedor fornecedor = new Fornecedor();
+				fornecedor.setCnpj("1123123123");
+				fornecedor.setEndereco("Casinha Seu joao");
+				fornecedor.setNome("Casa da Limpeza");
+				fornecedor.setTelefone("779999999");
+				fornecedor.setNotasFiscais(null);
+				fornecedorService.salvar(fornecedor);
+
+				notaEntrada.setFornecedor(fornecedorService.buscarPorId(fornecedor.getId()));
+				notaEntrada.setNumero("1581818181");
+				notaEntradaService.salvar(notaEntrada);
+				ItemNotaFiscalEntrada itemEntrada = new ItemNotaFiscalEntrada();
+
+				itemEntrada.setPrecoUnitario((long) 12);
+				itemEntrada.setProduto(p);
+				itemEntrada.setQuantidade(13);
+				itemEntrada.setNotaFiscalEntrada(notaEntrada);
+
+				itemEntradaService.salvar(itemEntrada);
 
 			} catch (RuntimeException e) {
 				System.out.println(e.getMessage());
 			}
 
-			System.out.println("Hello World");
-
-			categoriaService.listarTodos().forEach((e) -> {
-				System.out.println(e.getNome() + " " + e.getId());
-			});
 
 		};
 	}

@@ -1,6 +1,7 @@
 package com.example.fast_stock.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,23 @@ public class FornecedorService {
     @Transactional
     public Fornecedor atualizar(Fornecedor c) {
         return (repo.save(c));
+    }
+
+    @Transactional
+    public Fornecedor buscarPorId(Long id) {
+
+        Optional<Fornecedor> fornecedor = repo.findById(id);
+
+        if (fornecedor.isPresent()) {
+
+            Fornecedor fornecedorRetorno = fornecedor.get();
+            return fornecedorRetorno;
+
+        } else {
+
+            throw new RuntimeException("Não existe esse Id");
+
+        }
     }
 
     @Transactional

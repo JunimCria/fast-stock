@@ -1,16 +1,13 @@
 package com.example.fast_stock;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.time.LocalDate;
+
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.Calendar;
-import java.util.Date;
 import com.example.fast_stock.model.Categoria;
 import com.example.fast_stock.model.Cliente;
 import com.example.fast_stock.model.Fornecedor;
